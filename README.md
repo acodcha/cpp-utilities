@@ -1,2 +1,3 @@
-# updatable-priority-queue
-Simple C++ priority queue that allows updating the priority of its elements
+# Updatable Priority Queue
+
+Simple C++ priority queue that allows updating the priority of its elements.
