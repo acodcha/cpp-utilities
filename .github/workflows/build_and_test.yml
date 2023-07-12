@@ -15,6 +15,6 @@ jobs:
     - name: configure
       run: mkdir -p build && cd build && cmake .. -DBUILD_TESTING=ON
     - name: build
-      run: cd build && make
+      run: cd build && make --jobs=8
     - name: test
       run: cd build && make test
