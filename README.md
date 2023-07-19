@@ -15,7 +15,7 @@ Run unit tests with:
 mkdir build
 cd build
 cmake .. -DBUILD_TESTING=ON
-make -j
+make --jobs=8
 make test
 ```
 
