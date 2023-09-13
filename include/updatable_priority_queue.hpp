@@ -36,19 +36,23 @@
 // If multiple elements in the queue have the same priority, by default they are
 // ordered in increasing value given by std::less<Value>. This can be changed by
 // providing a different ValueComparator.
-template<class Value, class Priority,
-         class PriorityComparator = std::less<Priority>,
-         class ValueComparator = std::less<Value>>
+template <class Value, class Priority,
+          class PriorityComparator = std::less<Priority>,
+          class ValueComparator = std::less<Value>>
 class updatable_priority_queue {
 public:
   // Constructs an empty queue.
   updatable_priority_queue() noexcept = default;
 
   // Returns whether the queue is empty. The time complexity is O(1).
-  bool empty() const noexcept { return value_to_priority_.empty(); }
+  bool empty() const noexcept {
+    return value_to_priority_.empty();
+  }
 
   // Returns the number of elements in the queue. The time complexity is O(1).
-  std::size_t size() const noexcept { return value_to_priority_.size(); }
+  std::size_t size() const noexcept {
+    return value_to_priority_.size();
+  }
 
   // Returns the value of the head element in the queue. If multiple elements
   // are tied for the head priority, returns the first element value given by
@@ -82,7 +86,7 @@ public:
   // element is inserted, or false if the element is already in the queue. The
   // time complexity is O(log(N)), where N is the number of elements in the
   // queue.
-  bool insert(const Value& value, const Priority& priority) noexcept {
+  bool insert(const Value& value, const Priority& priority) {
     if (value_to_priority_.find(value) != value_to_priority_.cend()) {
       return false;
     }
