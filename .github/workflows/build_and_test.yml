@@ -11,9 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - name: install packages
-      run: sudo apt-get update && sudo apt-get install -y cmake g++
+      run: sudo apt-get update && sudo apt-get install --yes cmake g++
     - name: configure
-      run: mkdir -p build && cd build && cmake .. -DTEST_UPDATABLE_PRIORITY_QUEUE=ON
+      run: mkdir --parents build && cd build && cmake .. -DTEST_CPP_UTILITIES=ON
     - name: build
       run: cd build && make --jobs=8
     - name: test

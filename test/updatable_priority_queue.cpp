@@ -20,11 +20,13 @@
 //     USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // This file was originally obtained from:
-//     https://github.com/acodcha/updatable-priority-queue
+//     https://github.com/acodcha/cpp-utilities
 
-#include "../include/updatable_priority_queue.hpp"
+#include "../include/cpp-utilities/updatable_priority_queue.hpp"
 
 #include <gtest/gtest.h>
+
+namespace utility {
 
 namespace {
 
@@ -118,3 +120,5 @@ TEST(updatable_priority_queue, update) {
 }
 
 }  // namespace
+
+}  // namespace utility
