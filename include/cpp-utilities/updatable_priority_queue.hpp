@@ -20,9 +20,11 @@
 //     USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // This file was originally obtained from:
-//     https://github.com/acodcha/updatable-priority-queue
+//     https://github.com/acodcha/cpp-utilities
 
 #include <map>
+
+namespace utility {
 
 // Simple priority queue that allows updating the priority of its elements.
 // Furthermore, multiple elements can have the same priority, though this is
@@ -134,3 +136,5 @@ private:
   std::map<Value, Priority, ValueComparator> value_to_priority_;
   std::multimap<Priority, Value, PriorityComparator> priority_to_values_;
 };
+
+}  // namespace utility
