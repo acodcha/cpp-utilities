@@ -34,7 +34,7 @@ std::cout << name_and_score.head_value() << std::endl;  // Bob
 
 The C++ Standard Library's priority queue (`std::priority_queue`) does not support updating the priority of its elements. However, certain use cases such as Dijkstra's algorithm require this operation. This project implements a priority queue that supports updating the priority of its elements and achieves the same asymptotic time complexity and asymptotic space complexity as the C++ Standard Library's implementation.
 
-If you wish to use this implementation in your project, copy the [updatable_priority_queue.hpp](include/updatable_priority_queue.hpp) header file to your source code repository and include it in your C++ source code files with `#include "updatable_priority_queue.hpp"`.
+If you wish to use this implementation in your project, copy the [updatable_priority_queue.hpp](include/cpp-utilities/updatable_priority_queue.hpp) header file to your source code repository and include it in your C++ source code files with `#include "updatable_priority_queue.hpp"`.
 
 [(Back to Contents)](#contents)
 
