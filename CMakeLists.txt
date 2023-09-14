@@ -26,7 +26,7 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 # Define the global settings.
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math -O3 -Wall -Wextra -Wno-return-type -Wpedantic")
@@ -84,6 +84,11 @@ if(TEST_CPP_UTILITIES)
   enable_testing()
 
   # Define the C++ Utilities library test executables.
+
+  add_executable(test_constexpr_sqrt ${PROJECT_SOURCE_DIR}/test/constexpr_sqrt.cpp)
+  target_link_libraries(test_constexpr_sqrt GTest::gtest_main)
+  gtest_discover_tests(test_constexpr_sqrt)
+
   add_executable(test_updatable_priority_queue ${PROJECT_SOURCE_DIR}/test/updatable_priority_queue.cpp)
   target_link_libraries(test_updatable_priority_queue GTest::gtest_main)
   gtest_discover_tests(test_updatable_priority_queue)
