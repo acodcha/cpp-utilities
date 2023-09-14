@@ -22,8 +22,12 @@
 // This file was originally obtained from:
 //     https://github.com/acodcha/cpp-utilities
 
+#ifndef CPP_UTILITIES_INCLUDE_UPDATABLE_PRIORITY_QUEUE_HPP
+#define CPP_UTILITIES_INCLUDE_UPDATABLE_PRIORITY_QUEUE_HPP
+
 #include <map>
 
+// Namespace that encompasses all of the C++ Utilities library's content.
 namespace utility {
 
 // Simple priority queue that allows updating the priority of its elements.
@@ -138,3 +142,5 @@ private:
 };
 
 }  // namespace utility
+
+#endif  // CPP_UTILITIES_INCLUDE_UPDATABLE_PRIORITY_QUEUE_HPP

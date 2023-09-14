@@ -5,6 +5,7 @@
 Various utilities that extend the C++ Standard Library.
 
 - [Contents](#contents)
+  - [Constant Expression Square Root](#constant-expression-square-root)
   - [Updatable Priority Queue](#updatable-priority-queue)
 - [Configuration](#configuration)
 - [Testing](#testing)
@@ -12,9 +13,22 @@ Various utilities that extend the C++ Standard Library.
 
 ## Contents
 
+- [Constant Expression Square Root](#constant-expression-square-root)
 - [Updatable Priority Queue](#updatable-priority-queue)
 
 [(Back to Top)](#c-utilities)
+
+### Constant Expression Square Root
+
+Constant expression (`constexpr`) square root solver. Note that `std::sqrt` is not a constant expression. Returns the same result as `std::sqrt` to within one unit in the last place.
+
+```C++
+constexpr double a = utility::constexpr_sqrt(2.0);
+```
+
+If you wish to use this implementation in your project, copy the [constexpr_sqrt.hpp](include/cpp-utilities/constexpr_sqrt.hpp) header file to your source code repository and include it in your C++ source code files with `#include "constexpr_sqrt.hpp"`.
+
+[(Back to Contents)](#contents)
 
 ### Updatable Priority Queue
 
