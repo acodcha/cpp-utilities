@@ -1,6 +1,6 @@
 # C++ Utilities
 
-[![build and test](https://github.com/acodcha/cpp-utilities/actions/workflows/build_and_test.yml/badge.svg?branch=main)](https://github.com/acodcha/cpp-utilities/actions/workflows/build_and_test.yml)
+[![build and test](https://github.com/acodcha/cpp-utilities/actions/workflows/build_and_test.yaml/badge.svg?branch=main)](https://github.com/acodcha/cpp-utilities/actions/workflows/build_and_test.yaml)
 
 Various utilities that extend the C++ Standard Library.
 
