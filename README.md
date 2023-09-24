@@ -23,7 +23,7 @@ Various utilities that extend the C++ Standard Library.
 Constant expression (`constexpr`) square root solver. Note that `std::sqrt` is not a constant expression. Returns the same result as `std::sqrt` to within one unit in the last place.
 
 ```C++
-constexpr double a = utility::constexpr_sqrt(2.0);
+constexpr double square_root_of_two = utility::constexpr_sqrt(2.0);
 ```
 
 If you wish to use this implementation in your project, copy the [constexpr_sqrt.hpp](include/cpp-utilities/constexpr_sqrt.hpp) header file to your source code repository and include it in your C++ source code files with `#include "constexpr_sqrt.hpp"`.
@@ -36,12 +36,15 @@ Simple C++ priority queue that allows updating the priority of its elements.
 
 ```C++
 utility::updatable_priority_queue<std::string, double> name_and_score;
+
 name_and_score.insert("Alice", 10.0);
 name_and_score.insert("Bob", 15.0);
 name_and_score.insert("Claire", 5.0);
 std::cout << name_and_score.head_value() << std::endl;  // Claire
+
 name_and_score.update("Claire", 20.0);
 std::cout << name_and_score.head_value() << std::endl;  // Alice
+
 name_and_score.remove_head();
 std::cout << name_and_score.head_value() << std::endl;  // Bob
 ```
@@ -62,8 +65,8 @@ This project requires the following packages:
 Clone this project's repository and configure it with:
 
 ```bash
-git clone git@github.com:acodcha/updatable-priority-queue.git
-cd updatable-priority-queue
+git clone git@github.com:acodcha/cpp-utilities.git
+cd cpp-utilities
 mkdir build
 cd build
 cmake ..
@@ -79,10 +82,10 @@ Testing is optional, disabled by default, and requires the following additional 
 
 - **GoogleTest**: The GoogleTest library (<https://github.com/google/googletest>) is used for testing. On Ubuntu, install it with `sudo apt install libgtest-dev`. When testing is enabled, if the GoogleTest library is not found on your system, it is automatically downloaded, built, and linked with this project.
 
-You can manually test this project on your system from the `build` directory with:
+You can manually test this project from the `build` directory with:
 
 ```bash
-cmake .. -DTEST_UPDATABLE_PRIORITY_QUEUE=ON
+cmake .. -DTEST_CPP_UTILITIES=ON
 make --jobs=16
 make test
 ```
