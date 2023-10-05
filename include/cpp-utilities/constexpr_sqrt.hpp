@@ -40,7 +40,7 @@ namespace internal {
 // std::sqrt. This function is an internal implementation detail and is not
 // intended to be used except by the utility::constexpr_sqrt function.
 inline constexpr double constexpr_sqrt_solver(
-    const double number, const double factor) noexcept {
+    const double number, const double factor) {
   // Recursively factor the input number until it falls within the [0.25, 4]
   // interval, which greatly reduces the number of Newton-Raphson iterations
   // needed to numerically compute the square root. When solving s = sqrt(x), if
@@ -141,7 +141,7 @@ inline constexpr double constexpr_sqrt_solver(
 
 // Returns the square root of a double-precision floating-point number. This
 // function is a constant expression, unlike std::sqrt.
-inline constexpr double constexpr_sqrt(const double number) noexcept {
+inline constexpr double constexpr_sqrt(const double number) {
   // The square root of zero is zero. Notably, the square root solver does not
   // handle this value, so it must be treated separately.
   if (number == 0.0) {
