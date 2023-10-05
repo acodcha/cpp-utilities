@@ -36,7 +36,7 @@ namespace utility {
 //
 // By default, elements in the queue are ordered in increasing order of priority
 // given by std::less<Priority>, such that the element with the lowest priority
-// is at the head of the queue. This can be changed by providing a different
+// is at the front of the queue. This can be changed by providing a different
 // PriorityComparator.
 //
 // If multiple elements in the queue have the same priority, by default they are
@@ -48,7 +48,7 @@ template <class Value, class Priority,
 class updatable_priority_queue {
 public:
   // Constructs an empty queue.
-  updatable_priority_queue() noexcept = default;
+  updatable_priority_queue() = default;
 
   // Returns whether the queue is empty. The time complexity is O(1).
   bool empty() const noexcept {
@@ -60,26 +60,26 @@ public:
     return value_to_priority_.size();
   }
 
-  // Returns the value of the head element in the queue. If multiple elements
-  // are tied for the head priority, returns the first element value given by
+  // Returns the value of the front element in the queue. If multiple elements
+  // are tied for the front priority, returns the first element value given by
   // ValueComparator. Results in undefined behavior if the queue is empty, so
   // make sure the queue is not empty before calling this function. The time
   // complexity is O(1).
-  const Value& head_value() const noexcept {
+  const Value& front_value() const noexcept {
     return priority_to_values_.begin()->second;
   }
 
-  // Returns the priority of the head element in the queue. Results in undefined
-  // behavior if the queue is empty, so make sure the queue is not empty before
-  // calling this function. The time complexity is O(1).
-  const Priority& head_priority() const noexcept {
+  // Returns the priority of the front element in the queue. Results in
+  // undefined behavior if the queue is empty, so make sure the queue is not
+  // empty before calling this function. The time complexity is O(1).
+  const Priority& front_priority() const noexcept {
     return priority_to_values_.begin()->first;
   }
 
-  // Attempts to remove the head element in the queue. Returns true if the head
-  // element is successfully removed, or false if the queue is empty. The time
+  // Attempts to erase the front element in the queue. Returns true if the front
+  // element is successfully erased, or false if the queue is empty. The time
   // complexity is O(log(N)), where N is the number of elements in the queue.
-  bool remove_head() noexcept {
+  bool erase_front() {
     if (empty()) {
       return false;
     }
@@ -105,7 +105,7 @@ public:
   // the element with the given value is successfully updated to the new
   // priority, or false if the given value is not in the queue. The time
   // complexity is O(log(N)), where N is the number of elements in the queue.
-  bool update(const Value& value, const Priority& priority) noexcept {
+  bool update(const Value& value, const Priority& priority) {
     const typename std::map<Value, Priority, ValueComparator>::iterator
         found_value_and_priority = value_to_priority_.find(value);
 
@@ -137,7 +137,11 @@ public:
   }
 
 private:
+  // Map of values to their corresponding priorities.
   std::map<Value, Priority, ValueComparator> value_to_priority_;
+
+  // Map of priorities to values. There can be multiple values for the same
+  // priority, so this is a multimap.
   std::multimap<Priority, Value, PriorityComparator> priority_to_values_;
 };
 
