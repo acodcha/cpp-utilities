@@ -30,11 +30,41 @@ namespace utility {
 
 namespace {
 
+TEST(updatable_priority_queue, copy_assignment_operator) {
+  updatable_priority_queue<std::string, double> first;
+  EXPECT_TRUE(first.insert("Alice", 10.0));
+
+  updatable_priority_queue<std::string, double> second;
+  EXPECT_TRUE(first.insert("Bob", 20.0));
+  second = first;
+  EXPECT_EQ(first.size(), second.size());
+  EXPECT_EQ(first.front_value(), second.front_value());
+  EXPECT_EQ(first.front_priority(), second.front_priority());
+}
+
+TEST(updatable_priority_queue, copy_constructor) {
+  updatable_priority_queue<std::string, double> first;
+  EXPECT_TRUE(first.insert("Alice", 10.0));
+
+  const updatable_priority_queue<std::string, double> second{first};
+  EXPECT_EQ(first.size(), second.size());
+  EXPECT_EQ(first.front_value(), second.front_value());
+  EXPECT_EQ(first.front_priority(), second.front_priority());
+}
+
+TEST(updatable_priority_queue, default_constructor) {
+  updatable_priority_queue<std::string, double> queue;
+  EXPECT_TRUE(queue.empty());
+  EXPECT_EQ(queue.size(), 0);
+}
+
 TEST(updatable_priority_queue, empty) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.empty());
+
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_FALSE(queue.empty());
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_TRUE(queue.empty());
 }
@@ -42,12 +72,14 @@ TEST(updatable_priority_queue, empty) {
 TEST(updatable_priority_queue, erase_front) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_FALSE(queue.erase_front());
+
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_TRUE(queue.insert("Bob", 20.0));
   EXPECT_TRUE(queue.insert("Claire", 30.0));
   EXPECT_TRUE(queue.erase_front());
   EXPECT_TRUE(queue.erase_front());
   EXPECT_TRUE(queue.erase_front());
+
   EXPECT_FALSE(queue.erase_front());
 }
 
@@ -55,12 +87,16 @@ TEST(updatable_priority_queue, front_priority) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_EQ(queue.front_priority(), 10.0);
+
   EXPECT_TRUE(queue.insert("Bob", 20.0));
   EXPECT_EQ(queue.front_priority(), 10.0);
+
   EXPECT_TRUE(queue.insert("Claire", 5.0));
   EXPECT_EQ(queue.front_priority(), 5.0);
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_priority(), 10.0);
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_priority(), 20.0);
 }
@@ -69,12 +105,16 @@ TEST(updatable_priority_queue, front_value) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_EQ(queue.front_value(), "Alice");
+
   EXPECT_TRUE(queue.insert("Bob", 20.0));
   EXPECT_EQ(queue.front_value(), "Alice");
+
   EXPECT_TRUE(queue.insert("Claire", 5.0));
   EXPECT_EQ(queue.front_value(), "Claire");
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_value(), "Alice");
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_value(), "Bob");
 }
@@ -89,17 +129,83 @@ TEST(updatable_priority_queue, insert) {
   EXPECT_TRUE(queue.insert("Erin", 10.0));
 }
 
+TEST(updatable_priority_queue, move_assignment_operator) {
+  updatable_priority_queue<std::string, double> reference;
+  EXPECT_TRUE(reference.insert("Alice", 10.0));
+
+  updatable_priority_queue<std::string, double> first;
+  EXPECT_TRUE(first.insert("Alice", 10.0));
+
+  updatable_priority_queue<std::string, double> second;
+  second = std::move(first);
+  EXPECT_EQ(second.size(), reference.size());
+  EXPECT_EQ(second.front_value(), reference.front_value());
+  EXPECT_EQ(second.front_priority(), reference.front_priority());
+}
+
+TEST(updatable_priority_queue, move_constructor) {
+  updatable_priority_queue<std::string, double> reference;
+  EXPECT_TRUE(reference.insert("Alice", 10.0));
+
+  updatable_priority_queue<std::string, double> first;
+  EXPECT_TRUE(first.insert("Alice", 10.0));
+
+  updatable_priority_queue<std::string, double> second{std::move(first)};
+  EXPECT_EQ(second.size(), reference.size());
+  EXPECT_EQ(second.front_value(), reference.front_value());
+  EXPECT_EQ(second.front_priority(), reference.front_priority());
+}
+
+TEST(updatable_priority_queue, non_unique_priorities) {
+  updatable_priority_queue<std::string, double> queue;
+  EXPECT_TRUE(queue.insert("Alice", 10.0));
+  EXPECT_TRUE(queue.insert("Bob", 20.0));
+  EXPECT_TRUE(queue.insert("Claire", 10.0));
+  EXPECT_TRUE(queue.insert("David", 10.0));
+  EXPECT_EQ(queue.front_value(), "Alice");
+  EXPECT_EQ(queue.front_priority(), 10.0);
+
+  EXPECT_TRUE(queue.update("Alice", 20.0));
+  EXPECT_EQ(queue.front_value(), "Claire");
+  EXPECT_EQ(queue.front_priority(), 10.0);
+
+  EXPECT_TRUE(queue.erase_front());
+  EXPECT_EQ(queue.front_value(), "David");
+  EXPECT_EQ(queue.front_priority(), 10.0);
+
+  EXPECT_TRUE(queue.erase_front());
+  EXPECT_EQ(queue.front_value(), "Alice");
+  EXPECT_EQ(queue.front_priority(), 20.0);
+
+  EXPECT_TRUE(queue.erase_front());
+  EXPECT_EQ(queue.front_value(), "Bob");
+  EXPECT_EQ(queue.front_priority(), 20.0);
+}
+
 TEST(updatable_priority_queue, size) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_EQ(queue.size(), 0);
+
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_EQ(queue.size(), 1);
+
   EXPECT_TRUE(queue.insert("Bob", 20.0));
   EXPECT_EQ(queue.size(), 2);
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.size(), 1);
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.size(), 0);
+}
+
+TEST(updatable_priority_queue, unique_values) {
+  updatable_priority_queue<std::string, double> queue;
+  EXPECT_TRUE(queue.insert("Alice", 10.0));
+  EXPECT_TRUE(queue.insert("Bob", 20.0));
+  EXPECT_TRUE(queue.insert("Claire", 5.0));
+  EXPECT_FALSE(queue.insert("Alice", 10.0));
+  EXPECT_FALSE(queue.insert("Alice", 15.0));
 }
 
 TEST(updatable_priority_queue, update) {
@@ -108,13 +214,17 @@ TEST(updatable_priority_queue, update) {
   EXPECT_TRUE(queue.insert("Bob", 20.0));
   EXPECT_TRUE(queue.insert("Claire", 5.0));
   EXPECT_EQ(queue.front_value(), "Claire");
+
   EXPECT_TRUE(queue.update("Claire", 30.0));
   EXPECT_EQ(queue.front_value(), "Alice");
+
   EXPECT_TRUE(queue.update("Bob", 5.0));
   EXPECT_EQ(queue.front_value(), "Bob");
+
   EXPECT_FALSE(queue.update("Erin", 40.0));
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_value(), "Alice");
+
   EXPECT_TRUE(queue.erase_front());
   EXPECT_EQ(queue.front_value(), "Claire");
 }
