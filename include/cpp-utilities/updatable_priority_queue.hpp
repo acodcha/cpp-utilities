@@ -31,18 +31,19 @@
 // Namespace that encompasses all of the C++ Utilities library's content.
 namespace utility {
 
-// Simple priority queue that allows updating the priority of its elements.
-// Each element consist of a value and a priority. Multiple values can have the
-// same priority. However, values must be unique.
+// Simple C++ priority queue where the priorities of elements can be updated.
+// Each element consist of a value and a priority; multiple values can have the
+// same priority, but values must be unique.
 //
-// By default, elements in the queue are ordered in increasing order of priority
-// given by std::less<Priority>, such that the element with the lowest priority
-// is at the front of the queue. This can be changed by providing a different
+// By default, elements in the queue are ordered by increasing priority given by
+// std::less<Priority> such that the element with the lowest priority is at the
+// front of the queue. This can be changed by providing a different
 // PriorityComparator.
 //
 // If multiple elements in the queue have the same priority, by default they are
-// ordered in increasing value given by std::less<Value>. This can be changed by
-// providing a different ValueComparator.
+// ordered by increasing value given by std::less<Value> such that the lowest
+// value appears first. This can be changed by providing a different
+// ValueComparator.
 template <class Value, class Priority,
           class PriorityComparator = std::less<Priority>,
           class ValueComparator = std::less<Value>>
