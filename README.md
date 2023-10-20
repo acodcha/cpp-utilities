@@ -20,7 +20,7 @@ Various utilities that extend the C++ Standard Library.
 
 ### Constant Expression Square Root
 
-Constant expression (`constexpr`) square root solver. Note that `std::sqrt` is not a constant expression. Returns the same result as `std::sqrt` to within one unit in the last place.
+Constant expression (`constexpr`) square root function. Note that the C++ Standard Library's square root function (`std::sqrt`) is not a constant expression. Returns the same result as the C++ Standard Library's implementation to within one unit in the last place (1 ULP).
 
 ```C++
 constexpr double square_root_of_two = utility::constexpr_sqrt(2.0);
@@ -32,7 +32,7 @@ If you wish to use this implementation in your project, copy the [constexpr_sqrt
 
 ### Updatable Priority Queue
 
-Simple C++ priority queue that allows updating the priority of its elements.
+Simple C++ priority queue where the priorities of elements can be updated. Each element consist of a value and a priority; multiple values can have the same priority, but values must be unique.
 
 ```C++
 utility::updatable_priority_queue<std::string, double> name_and_score;
@@ -40,16 +40,16 @@ utility::updatable_priority_queue<std::string, double> name_and_score;
 name_and_score.insert("Alice", 10.0);
 name_and_score.insert("Bob", 15.0);
 name_and_score.insert("Claire", 5.0);
-std::cout << name_and_score.head_value() << std::endl;  // Claire
+std::cout << name_and_score.front_value() << std::endl;  // Claire
 
 name_and_score.update("Claire", 20.0);
-std::cout << name_and_score.head_value() << std::endl;  // Alice
+std::cout << name_and_score.front_value() << std::endl;  // Alice
 
-name_and_score.remove_head();
-std::cout << name_and_score.head_value() << std::endl;  // Bob
+name_and_score.erase_front();
+std::cout << name_and_score.front_value() << std::endl;  // Bob
 ```
 
-The C++ Standard Library's priority queue (`std::priority_queue`) does not support updating the priority of its elements. However, certain use cases such as Dijkstra's algorithm require this operation. This project implements a priority queue that supports updating the priority of its elements and achieves the same asymptotic time complexity and asymptotic space complexity as the C++ Standard Library's implementation.
+The C++ Standard Library's priority queue (`std::priority_queue`) does not support updating the priority of its elements; certain use cases such as Dijkstra's algorithm require this operation. This project implements a priority queue that supports updating the priority of its elements and achieves the same asymptotic time complexity and asymptotic space complexity as the C++ Standard Library's implementation to within a constant factor.
 
 If you wish to use this implementation in your project, copy the [updatable_priority_queue.hpp](include/cpp-utilities/updatable_priority_queue.hpp) header file to your source code repository and include it in your C++ source code files with `#include "updatable_priority_queue.hpp"`.
 
