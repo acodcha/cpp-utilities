@@ -3,21 +3,18 @@
 // This file is licensed under the MIT license. For more information, visit:
 //     https://mit-license.org
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//   - The above copyright notice and this permission notice shall be included
-//     in all copies or substantial portions of the Software.
-//   - THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-//     OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-//     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-//     NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-//     DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-//     OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-//     USE OR OTHER DEALINGS IN THE SOFTWARE.
+//   - The above copyright notice and this permission notice shall be included in all copies or
+//   substantial portions of the Software.
+//   - THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+//   BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//   NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+//   DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 // This file was originally obtained from:
 //     https://github.com/acodcha/cpp-utilities
@@ -30,7 +27,7 @@ namespace utility {
 
 namespace {
 
-TEST(updatable_priority_queue, copy_assignment_operator) {
+TEST(UpdatablePriorityQueue, CopyAssignmentOperator) {
   updatable_priority_queue<std::string, double> first;
   EXPECT_TRUE(first.insert("Alice", 10.0));
 
@@ -42,7 +39,7 @@ TEST(updatable_priority_queue, copy_assignment_operator) {
   EXPECT_EQ(first.front_priority(), second.front_priority());
 }
 
-TEST(updatable_priority_queue, copy_constructor) {
+TEST(UpdatablePriorityQueue, CopyConstructor) {
   updatable_priority_queue<std::string, double> first;
   EXPECT_TRUE(first.insert("Alice", 10.0));
 
@@ -52,13 +49,13 @@ TEST(updatable_priority_queue, copy_constructor) {
   EXPECT_EQ(first.front_priority(), second.front_priority());
 }
 
-TEST(updatable_priority_queue, default_constructor) {
+TEST(UpdatablePriorityQueue, DefaultConstructor) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.empty());
   EXPECT_EQ(queue.size(), 0);
 }
 
-TEST(updatable_priority_queue, empty) {
+TEST(UpdatablePriorityQueue, Empty) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.empty());
 
@@ -69,7 +66,7 @@ TEST(updatable_priority_queue, empty) {
   EXPECT_TRUE(queue.empty());
 }
 
-TEST(updatable_priority_queue, erase_front) {
+TEST(UpdatablePriorityQueue, EraseFront) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_FALSE(queue.erase_front());
 
@@ -83,7 +80,7 @@ TEST(updatable_priority_queue, erase_front) {
   EXPECT_FALSE(queue.erase_front());
 }
 
-TEST(updatable_priority_queue, front_priority) {
+TEST(UpdatablePriorityQueue, FrontPriority) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_EQ(queue.front_priority(), 10.0);
@@ -101,7 +98,7 @@ TEST(updatable_priority_queue, front_priority) {
   EXPECT_EQ(queue.front_priority(), 20.0);
 }
 
-TEST(updatable_priority_queue, front_value) {
+TEST(UpdatablePriorityQueue, FrontValue) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_EQ(queue.front_value(), "Alice");
@@ -119,7 +116,7 @@ TEST(updatable_priority_queue, front_value) {
   EXPECT_EQ(queue.front_value(), "Bob");
 }
 
-TEST(updatable_priority_queue, insert) {
+TEST(UpdatablePriorityQueue, Insert) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_TRUE(queue.insert("Bob", 20.0));
@@ -129,7 +126,7 @@ TEST(updatable_priority_queue, insert) {
   EXPECT_TRUE(queue.insert("Erin", 10.0));
 }
 
-TEST(updatable_priority_queue, move_assignment_operator) {
+TEST(UpdatablePriorityQueue, MoveAssignmentOperator) {
   updatable_priority_queue<std::string, double> reference;
   EXPECT_TRUE(reference.insert("Alice", 10.0));
 
@@ -143,7 +140,7 @@ TEST(updatable_priority_queue, move_assignment_operator) {
   EXPECT_EQ(second.front_priority(), reference.front_priority());
 }
 
-TEST(updatable_priority_queue, move_constructor) {
+TEST(UpdatablePriorityQueue, MoveConstructor) {
   updatable_priority_queue<std::string, double> reference;
   EXPECT_TRUE(reference.insert("Alice", 10.0));
 
@@ -156,7 +153,7 @@ TEST(updatable_priority_queue, move_constructor) {
   EXPECT_EQ(second.front_priority(), reference.front_priority());
 }
 
-TEST(updatable_priority_queue, non_unique_priorities) {
+TEST(UpdatablePriorityQueue, NonUniquePriorities) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_TRUE(queue.insert("Bob", 20.0));
@@ -182,7 +179,7 @@ TEST(updatable_priority_queue, non_unique_priorities) {
   EXPECT_EQ(queue.front_priority(), 20.0);
 }
 
-TEST(updatable_priority_queue, size) {
+TEST(UpdatablePriorityQueue, Size) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_EQ(queue.size(), 0);
 
@@ -199,7 +196,7 @@ TEST(updatable_priority_queue, size) {
   EXPECT_EQ(queue.size(), 0);
 }
 
-TEST(updatable_priority_queue, unique_values) {
+TEST(UpdatablePriorityQueue, UniqueValues) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_TRUE(queue.insert("Bob", 20.0));
@@ -208,7 +205,7 @@ TEST(updatable_priority_queue, unique_values) {
   EXPECT_FALSE(queue.insert("Alice", 15.0));
 }
 
-TEST(updatable_priority_queue, update) {
+TEST(UpdatablePriorityQueue, Update) {
   updatable_priority_queue<std::string, double> queue;
   EXPECT_TRUE(queue.insert("Alice", 10.0));
   EXPECT_TRUE(queue.insert("Bob", 20.0));
